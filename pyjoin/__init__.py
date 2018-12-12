@@ -1,5 +1,6 @@
 """Python API for using Join by joaoapps."""
 import requests
+import urllib
 
 SEND_URL = "https://joinjoaomgcd.appspot.com/_ah/api/messaging/v1/sendPush?apikey="
 LIST_URL = "https://joinjoaomgcd.appspot.com/_ah/api/registration/v1/listDevices?apikey="
@@ -15,7 +16,7 @@ def send_notification(api_key, text, device_id=None, device_ids=None, device_nam
     req_url = SEND_URL + api_key + "&text=" + text
     if title: req_url += "&title=" + title
     if icon: req_url += "&icon=" + icon
-    if image: req_url += "&image=" + image
+    if image: req_url += "&image=" + urllib.parse.quote(image)
     if smallicon: req_url += "&smallicon=" + smallicon
     if vibration: req_url += "&vibration=" + vibration
     if device_id: req_url += "&deviceId=" + device_id
